@@ -89,6 +89,18 @@ bool setup::spoofMac(const char * network, int index, std::string networkBuffer)
 	return newMac->setMac(network, macList->at(index).c_str(), networkBuffer.c_str());
 }
 
+bool setup::checkMac(std::string AdapterNameBuffer, int index)
+{
+	std::string MAC = macList->at(index);
+
+	for (int i = 0; i < 14; i++) {
+		i = i + 2;
+		MAC.insert(i, ":");
+	}
+
+	return newMac->checkMac(AdapterNameBuffer.c_str(), MAC.c_str());
+}
+
 std::string setup::searchAdapter(const char * AdapterName)
 {
 	return newMac->searchAdapter(AdapterName);

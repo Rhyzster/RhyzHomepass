@@ -42,6 +42,7 @@ namespace Public_RhyzHomepass {
 				return false;
 			}
 
+			UCHAR key[32] = { 0xA6, 0xA2, 0xD8, 0xEA, 0xCF, 0x95, 0x01, 0xD9, 0xA4, 0x99, 0x84, 0x1A, 0x8B, 0x1D, 0x86, 0xCE, 0x33, 0xE0, 0x76, 0xD5, 0x1C, 0x41, 0x51, 0xB7, 0x54, 0x5A, 0x8B, 0x4C, 0xCB, 0x4B, 0x78, 0x62 };
 
 			if (WlanHostedNetworkSetSecondaryKey(clientHandle, 32, key, FALSE, FALSE, &failReason, NULL) == ERROR_SUCCESS) {
 				std::cout << SSID << " Password Set Successfully!" << std::endl;
@@ -77,6 +78,7 @@ namespace Public_RhyzHomepass {
 		else {
 			while (macFile) {
 				macFile >> macs;
+				std::transform(macs.begin(), macs.end(), macs.begin(), ::toupper);
 				macList->push_back(macs);
 			}
 			macFile.close();

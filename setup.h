@@ -5,8 +5,10 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <locale>
 #include <stdlib.h>
 #include <wlanapi.h>
+#include <algorithm>
 #pragma comment(lib, "Wlanapi.lib")
 
 #include "changeMac.h"
@@ -24,6 +26,8 @@ class setup
 	void stopNetwork();
 
 	bool spoofMac(const char * network, int index, std::string networkBuffer);
+
+	bool checkMac(std::string AdapterNameBuffer, int index);
 	
 	void shuffle();
 	

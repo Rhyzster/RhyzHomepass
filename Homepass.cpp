@@ -21,6 +21,7 @@ using Public_RhyzHomepass::setupNintendoZone2;
 using Public_RhyzHomepass::setupNintendoZone3;
 using Public_RhyzHomepass::setupNintendoZone4;
 
+
 bool checkElevated()
 {
 		bool elevated = true;
@@ -40,7 +41,7 @@ bool checkElevated()
 
 int main(int argc, char *argv[])
 {	
-	std::cout << "\nRhyzHomePass v2.0\n" << std::endl;
+	std::cout << "\nRhyzHomePass v2.1\n" << std::endl;
 	
 	//bunch of error checking
 	if(!checkElevated()){
@@ -82,6 +83,8 @@ int main(int argc, char *argv[])
 
 	//need to check here can enable and disbale adpater too stop people inputting wrong adapter
 
+	//check here for MACs changing is correctly
+
 	//end of error checking
 	
 	srand((unsigned int)time(NULL)); //create good random seed
@@ -100,12 +103,14 @@ int main(int argc, char *argv[])
 					return -1;
 				}
 
-				if (homePass[j]->spoofMac(argv[1], i, connectionBuffer)) { //checking if mac address function changed mac address in registry at least
-					Sleep(3000);
-					homePass[j]->startNetwork();
-					Sleep(homePass[j]->time(atoi(argv[2])));
-					homePass[j]->stopNetwork();
-					Sleep(3000);
+				if (homePass[j]->spoofMac(argv[1], i, connectionBuffer)) {//checking if mac address function changed mac address in registry at least
+					if (homePass[j]->checkMac(connectionBuffer, i)) {
+						Sleep(3000);
+						homePass[j]->startNetwork();
+						Sleep(homePass[j]->time(atoi(argv[2])));
+						homePass[j]->stopNetwork();
+						Sleep(3000);
+					}
 				}
 				else {
 					return -1;

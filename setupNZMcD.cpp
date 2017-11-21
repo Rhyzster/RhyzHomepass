@@ -42,6 +42,7 @@ namespace Public_RhyzHomepass
 				return false;
 			}
 
+			UCHAR key[32] = { 0x1E, 0xD7, 0xD2, 0x39, 0X0E, 0x76, 0x67, 0xA4, 0xAE, 0xE1, 0xF4, 0xAB, 0x3B, 0x16, 0x45, 0x02, 0x8D, 0x04, 0x10, 0xEE, 0x80, 0x53, 0xCF, 0xDB, 0x71, 0x2D, 0x7C, 0x30, 0x00, 0x46, 0xDD, 0xF6 };
 
 			if (WlanHostedNetworkSetSecondaryKey(clientHandle, 32, key, FALSE, FALSE, &failReason, NULL) == ERROR_SUCCESS) {
 				std::cout << SSID << " Password Set Successfully!" << std::endl;
@@ -63,31 +64,29 @@ namespace Public_RhyzHomepass
 
 	bool setupNZMcD::createMacList()
 	{
-		std::string macs;
+		long long MACS = 86119736626944;
+		std::stringstream macs;
 
+		/*for (int i = 0; i < 160; i++) {
+			macs << std::uppercase << std::hex << MACS;
+			macList->push_back(macs.str());
+			macs.str("");
+			MACS++;
+		}
+		*/
 		std::ifstream macFile("Macs/NZ@McD.txt");
-		if (macFile.fail()) {
-			std::cout << "Error. Cannot Open " << SSID << ".txt File, Please Check it Exists and is in Correct Directory";
-			return false;
-		}
-		else if (macFile.peek() == EOF) {
-			std::cout << "Error. The " << SSID << ".txt File is Empty, Please Add some Mac Addresses to it";
-			return false;
-		}
-		else {
+		if (macFile.good()) { //txt file exists
+			std::string macs;
 			while (macFile) {
 				macFile >> macs;
+				std::transform(macs.begin(), macs.end(), macs.begin(), ::toupper);
 				macList->push_back(macs);
 			}
-		macFile.close();
-		if (macCount() - 1 != 160) {
-			std::cout << "Error. The NZ@McD.txt File doesnt contain all 160 Macs, Please add the 160 Mac Addresses to this File";
-			return false;
 		}
+		macFile.close();
 
 		shuffle();
 
 		return true;
-		}
 	}
 }

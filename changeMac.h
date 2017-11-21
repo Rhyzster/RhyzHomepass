@@ -1,10 +1,12 @@
 #ifndef CHANGEMAC_H
 #define CHANGEMAC_H
+#define _WIN32_DCOM
 
 #include <windows.h>
 #include <objbase.h>
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include <ctype.h>
 #include <WbemCli.h>
 #include <comdef.h>
@@ -25,6 +27,8 @@ namespace Public_RhyzHomepass{
 		bool setMac(const char * AdapterBuffer, const char * NewMAC, const char * AdapterNameBuffer);
 
 		bool resetAdapter(const char * AdapterName);
+
+		bool checkMac(const char * AdapterNameBuffer, const char * MAC);
 
 	};
 	
