@@ -83,8 +83,6 @@ int main(int argc, char *argv[])
 
 	//need to check here can enable and disbale adpater too stop people inputting wrong adapter
 
-	//check here for MACs changing is correctly
-
 	//end of error checking
 	
 	srand((unsigned int)time(NULL)); //create good random seed
@@ -119,6 +117,4 @@ int main(int argc, char *argv[])
 			homePass[j]->clearMacs();
 		}
 	}
-
-	return 0;
 }

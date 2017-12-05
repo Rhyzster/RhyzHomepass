@@ -268,7 +268,6 @@ bool changeMac::checkMac(const char * AdapterNameBuffer, const char * MAC) //loo
 			correctMac = true;
 		}else{
 			std::cout << "MAC did not change correctly, Skipping this MAC\n" << std::endl;
-			std::cout << vtProp.bstrVal << " != " << MAC;
 			correctMac = false;
 		}
 		VariantClear(&vtProp);

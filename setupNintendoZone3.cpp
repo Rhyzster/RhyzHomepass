@@ -42,8 +42,6 @@ namespace Public_RhyzHomepass {
 				return false;
 			}
 
-			UCHAR key[32] = { 0xE4, 0xAA, 0x7C, 0x40, 0x20, 0xEE, 0x07, 0xB5, 0x4E, 0x36, 0xF3, 0xE9, 0x64, 0x96, 0xC5, 0x05, 0xFB, 0x40, 0x3A, 0xFF, 0x33, 0x4F, 0x75, 0xB7, 0xC4, 0x24, 0x25, 0x33, 0x0F, 0xE3, 0x94, 0xCA };
-
 			if (WlanHostedNetworkSetSecondaryKey(clientHandle, 32, key, FALSE, FALSE, &failReason, NULL) == ERROR_SUCCESS) {
 				std::cout << SSID << " Password Set Successfully!" << std::endl;
 			}
@@ -65,6 +63,7 @@ namespace Public_RhyzHomepass {
 	bool setupNintendoZone3::createMacList()
 	{
 		std::string macs;
+		std::map<std::string, int> macsMap;
 
 		std::ifstream macFile("Macs/NintendoZone3.txt");
 		if (macFile.fail()) {
@@ -79,7 +78,16 @@ namespace Public_RhyzHomepass {
 			while (macFile) {
 				macFile >> macs;
 				std::transform(macs.begin(), macs.end(), macs.begin(), ::toupper);
-				macList->push_back(macs);
+				if (macs.length() != 12) {
+					std::cout << "Error: The MAC " << macs << " is not 12 characters long. Please Check " << SSID << ".txt file.\n" << std::endl;
+				}
+				else {
+					if (macsMap.find(macs) == macsMap.end()) {
+						//add to map
+						macsMap.insert(std::pair<std::string, int>(macs, 0));
+						macList->push_back(macs);
+					}
+				}
 			}
 			macFile.close();
 

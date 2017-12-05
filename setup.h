@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <wlanapi.h>
 #include <algorithm>
+#include <map>
 #pragma comment(lib, "Wlanapi.lib")
 
 #include "changeMac.h"

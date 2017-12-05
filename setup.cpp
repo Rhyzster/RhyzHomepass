@@ -73,7 +73,7 @@ void setup::clearMacs()
 
 void setup::shuffle()
 {
-	macList->erase(macList->begin()+macCount()-1); //last mac in the txt file gets added twice
+	//macList->erase(macList->begin()+macCount()-1); //last mac in the txt file gets added twice
 
 	for(int i = 0; i < (int) macList->size(); i++){	
 		int index = rand() % (i + 1);
