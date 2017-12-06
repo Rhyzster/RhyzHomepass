@@ -79,7 +79,7 @@ namespace Public_RhyzHomepass
 			while (macFile) {
 				macFile >> macs;
 				std::transform(macs.begin(), macs.end(), macs.begin(), ::toupper);
-				if (macs.length() != 12) {
+				if (macs.length() != 12 && macs.length() != 0) {
 					std::cout << "Error: The MAC " << macs << " is not 12 characters long. Please Check " << SSID << ".txt file.\n" << std::endl;
 				}
 				else {

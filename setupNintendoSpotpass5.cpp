@@ -41,7 +41,7 @@ namespace Public_RhyzHomepass {
 				std::cout << "Error setting Networks SSID, Error Code: " << failReason << std::endl;
 				return false;
 			}
-			
+
 			if (WlanHostedNetworkSetSecondaryKey(clientHandle, 32, key, FALSE, FALSE, &failReason, NULL) == ERROR_SUCCESS) {
 				std::cout << SSID << " Password Set Successfully!" << std::endl;
 			}
@@ -78,7 +78,7 @@ namespace Public_RhyzHomepass {
 			while (macFile) {
 				macFile >> macs;
 				std::transform(macs.begin(), macs.end(), macs.begin(), ::toupper);
-				if (macs.length() != 12) {
+				if (macs.length() != 12 && macs.length() != 0) {
 					std::cout << "Error: The MAC " << macs << " is not 12 characters long. Please Check " << SSID << ".txt file.\n" << std::endl;
 				}
 				else {
